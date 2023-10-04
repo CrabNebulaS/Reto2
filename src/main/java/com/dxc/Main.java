@@ -29,11 +29,13 @@ public class Main {
 
     private static void procesarArgumentos(String[] args) {
 
-        String[] cmds = null;
-        for(int i = 3; i <= args.length; i++) {
-            cmds[i - 2] = args[i];
+        if (args.length > 2) {
+            String[] cmds = new String[args.length - 2];
+            for (int i = 2; i < args.length; i++) {
+                cmds[i - 2] = args[i];
+            }
+            args = cmds;
         }
-        args = cmds;
 
         int argsLength = args.length;
         String arg0 = args[0].toLowerCase();
