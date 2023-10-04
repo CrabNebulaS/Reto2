@@ -3,6 +3,9 @@ package com.dxc;
 import com.dxc.controladores.ClientesController;
 import com.dxc.controladores.CuentasController;
 import com.dxc.controladores.PrestamosController;
+import com.dxc.controladores.UsuariosController;
+import com.dxc.modelos.usuarios.Administrador;
+import com.dxc.modelos.usuarios.Gestor;
 
 import java.util.Arrays;
 
@@ -27,20 +30,31 @@ public class Main {
 
     }
 
-    private static void procesarArgumentos(String[] args) {
+    private static void procesarArgumentos(String[] args) throws Exception {
+        int argsLength = args.length;
 
-        if (args.length > 2) {
-            String[] cmds = new String[args.length - 2];
-            for (int i = 2; i < args.length; i++) {
-                cmds[i - 2] = args[i];
+
+        String argUsuario = args[0];
+        String argClave = args[1];
+
+        if (argUsuario=="admin") {
+            Administrador admin = new Administrador(argUsuario, argClave, 0);
+            if (admin.LoginUsuario()) {
+                reordenarParametros(args);
             }
-            args = cmds;
+        } else {
+            Gestor gestor = new Gestor(argUsuario, argClave, 0);
+            if (gestor.LoginUsuario()) {
+                reordenarParametros(args);
+            }
         }
 
-        int argsLength = args.length;
+
+
         String arg0 = args[0].toLowerCase();
         String arg1 = args[1].toLowerCase();
         String arg2 = argsLength > 2 ? args[2].toLowerCase() : null;
+
 
         if (!arg0.equals("clients")) {
             mostrarInstrucciones();
@@ -51,11 +65,14 @@ public class Main {
             procesarArgumentosPrestamos(args);
         } else if (arg2 != null && arg2.equals("loan-evaluation")) {
             procesarArgumentosEvaluacionPrestamo(args);
-        } else {
+        } //else if ()
+
+        else {
             procesarArgumentosClientes(args);
         }
 
     }
+
 
     private static void procesarArgumentosClientes(String[] args) {
         int argsLength = args.length;

@@ -2,14 +2,22 @@ package com.dxc.modelos.usuarios;
 
 public class Administrador extends Usuario{
 
+        private Integer numAdministrador;
 
-        public boolean LoginUsuario() throws Exception {
-            System.out.printf("asd");
-            return true;
-        }
 
     @Override
-    public boolean LoginUsuario(String usuario, String password) throws Exception {
-        return false;
+    public boolean LoginUsuario() throws Exception {
+        if(this.getNobreUsuario()=="admin" & this.getPassword() =="admin") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Administrador(String nombre, String clave, Integer numAdministrador) {
+        super(nombre, clave);
+        this.setNobreUsuario(nombre);
+        this.setPassword(clave);
+        this.numAdministrador = numAdministrador;
     }
 }

@@ -22,5 +22,10 @@ public abstract class Usuario {
         this.password = password;
     }
 
-    public abstract boolean LoginUsuario(String usuario, String password) throws Exception;
+    public abstract boolean LoginUsuario() throws Exception;
+
+    public Usuario(String nobreUsuario, String password) {
+        this.nobreUsuario = nobreUsuario;
+        this.password = password;
+    }
 }
