@@ -1,9 +1,9 @@
-package es.netmind.mypersonalbankapi.utils;
+package com.dxc.utils;
 
-import es.netmind.mypersonalbankapi.modelos.clientes.Cliente;
-import es.netmind.mypersonalbankapi.modelos.clientes.ClientesFactory;
-import es.netmind.mypersonalbankapi.modelos.clientes.Empresa;
-import es.netmind.mypersonalbankapi.modelos.clientes.Personal;
+import com.dxc.modelos.clientes.Cliente;
+import com.dxc.modelos.clientes.ClientesFactory;
+import com.dxc.modelos.clientes.Empresa;
+import com.dxc.modelos.clientes.Personal;
 
 import java.time.LocalDate;
 import java.util.HashMap;

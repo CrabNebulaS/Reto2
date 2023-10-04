@@ -1,6 +1,6 @@
-package es.netmind.mypersonalbankapi.persistencia;
+package com.dxc.persistencia;
 
-import es.netmind.mypersonalbankapi.modelos.clientes.Cliente;
+import com.dxc.modelos.clientes.Cliente;
 
 import java.util.List;
 

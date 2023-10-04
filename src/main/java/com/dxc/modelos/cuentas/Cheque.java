@@ -1,4 +1,4 @@
-package es.netmind.mypersonalbankapi.modelos.cuentas;
+package com.dxc.modelos.cuentas;
 
 import java.time.LocalDate;
 

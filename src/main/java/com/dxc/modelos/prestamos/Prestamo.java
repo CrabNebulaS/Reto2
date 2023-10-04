@@ -1,4 +1,4 @@
-package es.netmind.mypersonalbankapi.modelos.prestamos;
+package com.dxc.modelos.prestamos;
 
 import java.time.LocalDate;
 import java.util.List;

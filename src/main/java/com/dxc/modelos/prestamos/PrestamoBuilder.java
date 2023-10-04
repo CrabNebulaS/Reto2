@@ -1,10 +1,10 @@
-package es.netmind.mypersonalbankapi.modelos.prestamos;
+package com.dxc.modelos.prestamos;
 
-import es.netmind.mypersonalbankapi.exceptions.ClienteException;
-import es.netmind.mypersonalbankapi.exceptions.ErrorCode;
-import es.netmind.mypersonalbankapi.modelos.clientes.Cliente;
-import es.netmind.mypersonalbankapi.modelos.clientes.Empresa;
-import es.netmind.mypersonalbankapi.modelos.clientes.Personal;
+import com.dxc.exceptions.ClienteException;
+import com.dxc.exceptions.ErrorCode;
+import com.dxc.modelos.clientes.Cliente;
+import com.dxc.modelos.clientes.Empresa;
+import com.dxc.modelos.clientes.Personal;
 
 import java.time.LocalDate;
 

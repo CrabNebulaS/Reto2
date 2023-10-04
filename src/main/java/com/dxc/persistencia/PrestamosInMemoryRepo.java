@@ -1,9 +1,9 @@
-package es.netmind.mypersonalbankapi.persistencia;
+package com.dxc.persistencia;
 
-import es.netmind.mypersonalbankapi.exceptions.ErrorCode;
-import es.netmind.mypersonalbankapi.exceptions.PrestamoException;
-import es.netmind.mypersonalbankapi.modelos.clientes.Cliente;
-import es.netmind.mypersonalbankapi.modelos.prestamos.Prestamo;
+import com.dxc.exceptions.ErrorCode;
+import com.dxc.exceptions.PrestamoException;
+import com.dxc.modelos.clientes.Cliente;
+import com.dxc.modelos.prestamos.Prestamo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

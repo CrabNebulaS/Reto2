@@ -1,7 +1,7 @@
-package es.netmind.mypersonalbankapi.modelos.clientes;
+package com.dxc.modelos.clientes;
 
-import es.netmind.mypersonalbankapi.modelos.cuentas.Cuenta;
-import es.netmind.mypersonalbankapi.modelos.prestamos.Prestamo;
+import com.dxc.modelos.cuentas.Cuenta;
+import com.dxc.modelos.prestamos.Prestamo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

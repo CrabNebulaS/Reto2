@@ -1,11 +1,11 @@
-package es.netmind.mypersonalbankapi.persistencia;
+package com.dxc.persistencia;
 
-import es.netmind.mypersonalbankapi.exceptions.CuentaException;
-import es.netmind.mypersonalbankapi.exceptions.ErrorCode;
-import es.netmind.mypersonalbankapi.modelos.clientes.Cliente;
-import es.netmind.mypersonalbankapi.modelos.cuentas.Ahorro;
-import es.netmind.mypersonalbankapi.modelos.cuentas.Corriente;
-import es.netmind.mypersonalbankapi.modelos.cuentas.Cuenta;
+import com.dxc.exceptions.CuentaException;
+import com.dxc.exceptions.ErrorCode;
+import com.dxc.modelos.clientes.Cliente;
+import com.dxc.modelos.cuentas.Ahorro;
+import com.dxc.modelos.cuentas.Corriente;
+import com.dxc.modelos.cuentas.Cuenta;
 
 import java.io.InvalidObjectException;
 import java.time.LocalDate;

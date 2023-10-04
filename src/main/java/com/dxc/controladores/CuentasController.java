@@ -1,12 +1,12 @@
-package es.netmind.mypersonalbankapi.controladores;
+package com.dxc.controladores;
 
-import es.netmind.mypersonalbankapi.exceptions.CuentaException;
-import es.netmind.mypersonalbankapi.modelos.clientes.Cliente;
-import es.netmind.mypersonalbankapi.modelos.cuentas.Cuenta;
-import es.netmind.mypersonalbankapi.persistencia.ClientesInMemoryRepo;
-import es.netmind.mypersonalbankapi.persistencia.CuentasInMemoryRepo;
-import es.netmind.mypersonalbankapi.persistencia.IClientesRepo;
-import es.netmind.mypersonalbankapi.persistencia.ICuentasRepo;
+import com.dxc.exceptions.CuentaException;
+import com.dxc.modelos.clientes.Cliente;
+import com.dxc.modelos.cuentas.Cuenta;
+import com.dxc.persistencia.ClientesInMemoryRepo;
+import com.dxc.persistencia.CuentasInMemoryRepo;
+import com.dxc.persistencia.IClientesRepo;
+import com.dxc.persistencia.ICuentasRepo;
 
 import java.util.List;
 

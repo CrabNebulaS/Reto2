@@ -1,6 +1,6 @@
-package es.netmind.mypersonalbankapi.persistencia;
+package com.dxc.persistencia;
 
-import es.netmind.mypersonalbankapi.modelos.prestamos.Prestamo;
+import com.dxc.modelos.prestamos.Prestamo;
 
 import java.util.List;
 

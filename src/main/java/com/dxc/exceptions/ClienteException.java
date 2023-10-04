@@ -1,4 +1,4 @@
-package es.netmind.mypersonalbankapi.exceptions;
+package com.dxc.exceptions;
 
 public class ClienteException extends Exception{
     private final ErrorCode code;

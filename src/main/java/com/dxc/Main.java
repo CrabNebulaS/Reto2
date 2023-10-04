@@ -1,8 +1,8 @@
 package com.dxc;
 
-import es.netmind.mypersonalbankapi.controladores.ClientesController;
-import es.netmind.mypersonalbankapi.controladores.CuentasController;
-import es.netmind.mypersonalbankapi.controladores.PrestamosController;
+import com.dxc.controladores.ClientesController;
+import com.dxc.controladores.CuentasController;
+import com.dxc.controladores.PrestamosController;
 
 import java.util.Arrays;
 

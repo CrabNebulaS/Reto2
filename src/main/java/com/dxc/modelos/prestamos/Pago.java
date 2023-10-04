@@ -1,4 +1,4 @@
-package es.netmind.mypersonalbankapi.modelos.prestamos;
+package com.dxc.modelos.prestamos;
 
 public class Pago {
 }

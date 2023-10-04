@@ -1,4 +1,4 @@
-package es.netmind.mypersonalbankapi.exceptions;
+package com.dxc.exceptions;
 
 public enum ErrorCode {
     NONEXISTINGCLIENT,

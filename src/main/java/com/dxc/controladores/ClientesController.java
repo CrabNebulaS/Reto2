@@ -1,10 +1,10 @@
-package es.netmind.mypersonalbankapi.controladores;
+package com.dxc.controladores;
 
-import es.netmind.mypersonalbankapi.exceptions.ClienteException;
-import es.netmind.mypersonalbankapi.modelos.clientes.Cliente;
-import es.netmind.mypersonalbankapi.modelos.prestamos.Prestamo;
-import es.netmind.mypersonalbankapi.persistencia.*;
-import es.netmind.mypersonalbankapi.utils.ClientesUtils;
+import com.dxc.exceptions.ClienteException;
+import com.dxc.modelos.clientes.Cliente;
+import com.dxc.modelos.prestamos.Prestamo;
+import com.dxc.persistencia.*;
+import com.dxc.utils.ClientesUtils;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
