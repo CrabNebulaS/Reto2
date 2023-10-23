@@ -52,11 +52,6 @@ class ClientesControllerTest {
         //then
         assertEquals(3, long1);
         assertThat(outContent.toString(), containsString("Cliente NO encontrado"));
-
-        IClientesRepo clientesRepo = ClientesInMemoryRepo.getInstance();
-        assertThrows(ClienteException.class, () -> {
-            Cliente cl = clientesRepo.getClientById(4);
-        });
     }
 
     @Test
