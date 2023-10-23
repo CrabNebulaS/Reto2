@@ -11,22 +11,23 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static java.lang.System.out;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.*;
 
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class ClientesControllerTest {
+class ClientesControllerTest2 {
 
-    private final PrintStream stdOut = System.out;
-    private final ByteArrayOutputStream outCaptor = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+    private final PrintStream originalErr = System.err;
 
     @BeforeEach
-    public void setUp() {
-        System.setOut(new PrintStream(outCaptor));
-    }
-    @AfterEach
-    public void restoreOut() {
-        System.setOut(new PrintStream(stdOut));
+    public void setUpStreams() {
+        System.setOut(new PrintStream(outContent));
+        System.setErr(new PrintStream(errContent));
     }
 
     @Test
@@ -98,11 +99,36 @@ class ClientesControllerTest {
                 "12345678Z"
         };
         ClientesController.add(datos);
-        String respuesta = outCaptor.toString();
-
-        //restoreOut();
-        //System.out.println(respuesta);
+        String respuesta = outContent.toString();
 
         assertTrue(respuesta.contains("Cliente añadido"));
+    }
+
+    @Test
+    @Order(6)
+    void dadoUsuarioQuiereAltaCliente_cuandoDatosNOK_entoncesAltaNOK() {
+        String[] datos = {
+                "empresa",
+                "Servicios Informatico SL",
+                "sis.com",
+                "Calle SI 3",
+                "2023-10-23",
+                "J12345678"
+        };
+        ClientesController.add(datos);
+
+        ClientesController.mostrarLista();
+        System.out.println(outContent);
+        //Test NOK
+        //assertThat(outContent.toString(), containsString("Oops ha habido un problema, inténtelo más tarde 😞!"));
+
+        //Test OK (Cliente no válido, falta @ en email)
+        assertThat(outContent.toString(), containsString("Cliente NO válido 😞!"));
+    }
+
+    @AfterEach
+    public void restoreStreams() {
+        System.setOut(originalOut);
+        System.setErr(originalErr);
     }
 }
