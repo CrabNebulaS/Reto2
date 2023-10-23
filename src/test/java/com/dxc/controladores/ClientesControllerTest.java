@@ -11,22 +11,23 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static java.lang.System.out;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.*;
 
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ClientesControllerTest {
 
-    private final PrintStream stdOut = System.out;
-    private final ByteArrayOutputStream outCaptor = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+    private final PrintStream originalErr = System.err;
 
     @BeforeEach
-    public void setUp() {
-        System.setOut(new PrintStream(outCaptor));
-    }
-    @AfterEach
-    public void restoreOut() {
-        System.setOut(new PrintStream(stdOut));
+    public void setUpStreams() {
+        System.setOut(new PrintStream(outContent));
+        System.setErr(new PrintStream(errContent));
     }
 
     @Test
@@ -38,11 +39,7 @@ class ClientesControllerTest {
         ClientesController.mostrarDetalle(1);
         //then
         assertEquals(3, long1);
-
-
-        IClientesRepo clientesRepo = ClientesInMemoryRepo.getInstance();
-        Cliente cl = clientesRepo.getClientById(1);
-        assertTrue(cl.validar());
+        assertThat(outContent.toString(), containsString("Personal{dni='12345678J'} Cliente{id=1, nombre='Juan Juanez', email='jj@j.com', direccion='Calle JJ 1', alta=2023-10-23, activo=true, moroso=false, cuentas=[Cuenta{id=1, fechaCreacion=2023-10-23, saldo=100.0, transacciones=null, interes=1.1, comision=0.2}, Cuenta{id=4, fechaCreacion=2023-10-23, saldo=300.0, transacciones=null, interes=1.1, comision=0.2}], prestamos=[Prestamo{id=1, fechaConcesion=2023-10-23, monto=1000.0, saldo=1000.0, pagos=null, moras=null, interes=4, interesMora=2, moroso=false, liquidado=false}]}"));
     }
 
     @Test
@@ -54,6 +51,7 @@ class ClientesControllerTest {
         ClientesController.mostrarDetalle(4);
         //then
         assertEquals(3, long1);
+        assertThat(outContent.toString(), containsString("Cliente NO encontrado"));
 
         IClientesRepo clientesRepo = ClientesInMemoryRepo.getInstance();
         assertThrows(ClienteException.class, () -> {
@@ -63,6 +61,40 @@ class ClientesControllerTest {
 
     @Test
     @Order(3)
+    void dadoUsuarioQuiereModificarCliente_cuandoDatosNOK_entoncesModificacionNOK() {
+        String[] datos = {
+                "Francisco Lopez",
+                "emaile|gmail.com",
+                "C/Huelva 13, Barcelona",
+                "2023-10-18",
+                "true",
+                "false",
+                "12345678Z"
+        };
+        ClientesController.actualizar(1, datos);
+
+        assertThat(outContent.toString(), containsString("nombre='Juan Juanez', email='jj@j.com'"));
+    }
+
+    @Test
+    @Order(4)
+    void dadoUsuarioQuiereModificarCliente_cuandoDatosOK_entoncesModificacionOK() {
+        String[] datos = {
+                "Carlos Lopez",
+                "emaile@gmail.com",
+                "C/Huelva 13, Barcelona",
+                "2023-10-18",
+                "true",
+                "false",
+                "12345678Z"
+        };
+        ClientesController.actualizar(1, datos);
+
+        assertThat(outContent.toString(), containsString("Carlos Lopez"));
+    }
+
+    @Test
+    @Order(5)
     void dadoUsuarioQuiereConsultar_cuandoHayClientes_entoncesObtieneListaClientes() {
         //given
         int long1 = ClientesController.numeroClientes();
@@ -70,10 +102,11 @@ class ClientesControllerTest {
         ClientesController.mostrarLista();
         //then
         assertEquals(3, long1);
+        assertThat(outContent.toString(), containsString("(3) Servicios Informatico SL 3"));
     }
 
     @Test
-    @Order(4)
+    @Order(6)
     void dadoUsuarioQuiereConsultar_cuandoNoHayClientes_entoncesObtieneListaVacia() {
         //given
         ClientesController.eliminar(1);
@@ -87,7 +120,7 @@ class ClientesControllerTest {
     }
 
     @Test
-    @Order(5)
+    @Order(7)
     void dadoUsuarioQuiereAltaCliente_cuandoDatosOK_entoncesAltaOK() {
         String[] datos = {
                 "personal",
@@ -98,11 +131,36 @@ class ClientesControllerTest {
                 "12345678Z"
         };
         ClientesController.add(datos);
-        String respuesta = outCaptor.toString();
-
-        //restoreOut();
-        //System.out.println(respuesta);
+        String respuesta = outContent.toString();
 
         assertTrue(respuesta.contains("Cliente añadido"));
+    }
+
+    @Test
+    @Order(8)
+    void dadoUsuarioQuiereAltaCliente_cuandoDatosNOK_entoncesAltaNOK() {
+        String[] datos = {
+                "empresa",
+                "Servicios Informatico SL",
+                "sis.com",
+                "Calle SI 3",
+                "2023-10-23",
+                "J12345678"
+        };
+        ClientesController.add(datos);
+
+        ClientesController.mostrarLista();
+        System.out.println(outContent);
+        //Test NOK
+        //assertThat(outContent.toString(), containsString("Oops ha habido un problema, inténtelo más tarde 😞!"));
+
+        //Test OK (Cliente no válido, falta @ en email)
+        assertThat(outContent.toString(), containsString("Cliente NO válido"));
+    }
+
+    @AfterEach
+    public void restoreStreams() {
+        System.setOut(originalOut);
+        System.setErr(originalErr);
     }
 }
